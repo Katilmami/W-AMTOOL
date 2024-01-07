@@ -7,17 +7,17 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest  # Windows işletim sistemini seç
+    runs-on: windows-latest  
 
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v2
 
     - name: Set up Python
-      run: |
-        mkdir -p $GITHUB_WORKSPACE\python
-        Invoke-WebRequest -Uri "https://github.com/actions/python-versions/releases/download/3.9.0-96741/python-3.9.0-win32-x86.zip" -OutFile "$GITHUB_WORKSPACE\python\python.zip"
-        Expand-Archive -Path "$GITHUB_WORKSPACE\python\python.zip" -DestinationPath "$GITHUB_WORKSPACE\python" -Force
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
+
 
     - name: Install Dependencies
       run: |
@@ -26,10 +26,11 @@ jobs:
     - name: Build exe
       run: |
         pip install cx_Freeze
-        python setup.py build
+        python setup.py build_exe --target-dir=build/exe.win-amd64-3.9 --include-modules=
+        tkinter --base=Win32GUI
 
     - name: Upload exe
       uses: actions/upload-artifact@v2
       with:
         name: wiamtool
-        path: build/exe.win-amd64-3.9/
+        path: build/exe.win-amd64-3.9/mami.exe
