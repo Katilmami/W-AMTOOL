@@ -1,0 +1,35 @@
+name: Build exe
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9-32bit 
+
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Build exe
+      run: |
+        pip install pyinstaller
+        pyinstaller --onefile your_script.py
+
+    - name: Upload exe
+      uses: actions/upload-artifact@v2
+      with:
+        name: your_script
+        path: dist/your_script.exe
