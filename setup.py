@@ -1,17 +1,8 @@
-import sys
-from cx_Freeze import setup, Executable
+from distutils.core import setup
+import py2exe
 
-# Uygulama adı ve versiyonu
-application_name = "wiamtool"
-application_version = "1.0"
-
-# Uygulamanın çalıştığı ana dosya
-main_script = "mami.py"
-
-# setup fonksiyonu
 setup(
-    name=application_name,
-    version=application_version,
-    description="wiamtool",
-    executables=[Executable(main_script)],
+    options={'py2exe': {'bundle_files': 1, 'compressed': True}},
+    windows=[{'script': 'mami.py'}],  # your_script.py, ana Python betiğinizin adını belirtin
+    zipfile=None,
 )
