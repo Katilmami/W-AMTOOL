@@ -25,7 +25,7 @@ jobs:
     - name: Build exe
       run: |
         pip install cx_Freeze
-        python setup.py build_exe --target-dir=build/exe.win-amd64-3.9 --base=Win64GUI
+        python setup.py build_exe --base=Win64GUI
 
     - name: Upload exe
       uses: actions/upload-artifact@v2
