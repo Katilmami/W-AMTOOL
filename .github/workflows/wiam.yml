@@ -16,7 +16,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: 3.x  # Python sürümünü belirtin
+        python-version: 3.11 # Python sürümünü belirtin
 
     - name: Install Dependencies
       run: |
