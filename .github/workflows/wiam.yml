@@ -34,4 +34,4 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: your_script
-        path: build/exe.win32-3.9/mami.exe
+        path: build/exe.win-amd64-3.9/wiamtool.exe
