@@ -16,17 +16,18 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: 3.9-32bit 
+        python-version: 3.9
 
     - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+        pip install pywin32
 
     - name: Build exe
       run: |
         pip install pyinstaller
-        pyinstaller --onefile your_script.py
+        pyinstaller --onefile --arch=32bit mami.py
 
     - name: Upload exe
       uses: actions/upload-artifact@v2
