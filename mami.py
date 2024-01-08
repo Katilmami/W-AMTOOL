@@ -12,7 +12,7 @@ def update_font_size(event=None):
     screen_width = root.winfo_screenwidth()
 
     # Başlık yazı boyutunu ekran genişliğine göre ayarla
-    title_font_size = int(screen_width / 20)
+    title_font_size = int(min(screen_width / 25, screen_width / len(title_text)))
     title_label.configure(font=('Arial', title_font_size))
 
 # Ana pencere oluşturuluyor
@@ -26,23 +26,24 @@ screen_height = root.winfo_screenheight()
 # Pencereyi tam ekran yap
 root.attributes('-fullscreen', True)
 
-# Arka plan rengi mor yapılıyor
-root.configure(bg="#663399")
+# Arka plan rengi koyu mor yapılıyor
+root.configure(bg="#2E0854")
 
 # Başlık için etiket oluşturuluyor
-title_font_size = int(screen_width / 20)
-title_label = ttk.Label(root, text="WİAM TOOL - DİSCORD HERŞEY", font=('Arial', title_font_size), background="#663399", foreground="white")
+title_text = "WİAM TOOL - DİSCORD HERŞEY"
+title_font_size = int(min(screen_width / 25, screen_width / len(title_text)))
+title_label = ttk.Label(root, text=title_text, font=('Arial', title_font_size), background="#2E0854", foreground="white")
 title_label.grid(row=0, column=0, columnspan=2, pady=(20, 10))  # pady ile üst boşluğu ayarla
 
 # Stil oluşturuluyor
 style = ttk.Style()
 
-# Normal durum için stil
+# Normal durum için stil (koyu mor)
 button_font_size = int(screen_width / 50)
-style.configure('TButton', padding=(20, 10), background='#4B0082', foreground='white', font=('Arial', button_font_size))
+style.configure('TButton', padding=(20, 10), background='#2E0854', foreground='white', font=('Arial', button_font_size))
 
-# Farenin üzerine gelindiğinde stil
-style.map('TButton', background=[('active', '#6A5ACD')])
+# Farenin üzerine gelindiğinde stil (açık mor)
+style.map('TButton', background=[('active', '#4B0082')])
 
 # Seçenekler için 10 tane buton ve her birine özel komut ekleniyor
 button_commands = {
@@ -60,7 +61,13 @@ button_commands = {
 
 buttons = []
 
-# Butonların sabit boyutlarda dinamik olarak yerleştirilmesi
+# Butonların renkleri koyu mor
+button_font_size = int(screen_width / 50)
+button_style = ttk.Style()
+button_style.configure('TButton', padding=(20, 10), background='#2E0854', foreground='white', font=('Arial', button_font_size))
+button_style.map('TButton', background=[('active', '#4B0082')])
+
+# Butonları oluştur ve grid'e yerleştir
 columns = 2
 rows = (len(button_commands) + columns - 1) // columns
 
